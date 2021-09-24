@@ -1,2 +1,2 @@
 apply Plugins.androidLibrary
-apply from: "$rootDir/${GradleName.common}"
+apply from: "$rootDir/common.gradle"
