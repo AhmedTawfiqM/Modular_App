@@ -1,0 +1,2 @@
+apply Plugins.androidLibrary
+apply from: "$rootDir/${GradleName.common}"
