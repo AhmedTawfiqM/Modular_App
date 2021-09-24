@@ -1,2 +1,2 @@
-class Deps {
+object Deps {
 }
