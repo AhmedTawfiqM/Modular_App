@@ -1,5 +1,6 @@
 apply plugin: Plugins.androidApplication
 apply from: "$rootDir/$GradleName.commonAndroidLib"
+apply plugin: 'kotlin-android'
 
 android {
     compileSdk 31
