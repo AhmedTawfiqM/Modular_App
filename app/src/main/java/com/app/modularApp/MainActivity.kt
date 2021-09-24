@@ -1,4 +1,4 @@
-package com.app.modualrprqctice
+package com.app.modularApp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

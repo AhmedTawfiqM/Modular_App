@@ -1,13 +1,11 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: Plugins.androidApplication
+apply from: "$rootDir/$GradleName.commonAndroidLib"
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.app.modualrprqctice"
+        applicationId "com.app.modularApp"
         minSdk 21
         targetSdk 31
         versionCode 1

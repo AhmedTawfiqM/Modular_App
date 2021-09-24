@@ -1,4 +1,4 @@
-package com.app.modualrprqctice
+package com.app.modularApp
 
 import org.junit.Test
 
