@@ -1,3 +1,6 @@
+import deps.Libs
+import deps.TestLibs
+
 apply from: "$rootDir/$GradleName.common"
 
 dependencies {
@@ -10,4 +13,7 @@ dependencies {
     api TestLibs.junit
     api TestLibs.androidXLibs.junit
     api TestLibs.androidXLibs.espresso
+
+    api Libs.coroutinesLibs.coroutinesCore
+    api Libs.coroutinesLibs.coroutinesAndroid
 }

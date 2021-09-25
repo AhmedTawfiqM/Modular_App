@@ -1,3 +1,5 @@
+import deps.Libs
+
 apply from: "$rootDir/$GradleName.common"
 
 dependencies {

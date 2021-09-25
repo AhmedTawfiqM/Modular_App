@@ -1,9 +1,12 @@
+package deps
+
 object Libs {
 
     val androidLibs = AndroidLibs
     val materialDesignLibs = MaterialDesignLibs
     val networkLibs = NetworkLibs
     val gsonLibs = GsonLibs
+    val coroutinesLibs = CoroutinesLibs
 
     object AndroidLibs {
         const val core = "androidx.core:core-ktx:${Versions.appCompat}"
@@ -30,6 +33,15 @@ object Libs {
         const val gsonGoogle = "com.google.code.gson:gson:${Versions.gsonGoogle}"
     }
 
+    object CoroutinesLibs{
+        //coroutines
+        const val coroutinesCore =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val coroutinesAndroid =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    }
+    }
+
     object Versions {
 
         //android core
@@ -42,6 +54,9 @@ object Libs {
         const val retrofit = "2.9.0"
         const val loggingInterceptor = "4.9.1"
         const val gsonGoogle = "2.8.7"
-    }
+
+        //Kotlin Coroutines
+        const val coroutines = "1.5.0"
+
 }
 

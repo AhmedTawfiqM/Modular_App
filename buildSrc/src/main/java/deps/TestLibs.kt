@@ -1,3 +1,5 @@
+package deps
+
 object TestLibs {
 
     val androidXLibs = AndroidXLibs
