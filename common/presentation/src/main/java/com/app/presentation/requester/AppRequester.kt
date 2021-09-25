@@ -8,14 +8,6 @@ class AppRequester {
 
     companion object {
 
-        fun <T> requestCall(context: Context, task: (() -> T)): T? {
-
-            if (!NetworkVisibility.isAvailable(context))
-                return null  //TODO 'custom login'
-
-            return task.invoke()
-        }
-
         suspend fun <T> request(context: Context, repoCall: suspend () -> T): T? {
 
             if (!NetworkVisibility.isAvailable(context))
@@ -30,7 +22,15 @@ class AppRequester {
             val result = job.await()
             job.cancel()
 
-            return result.invoke()
+            return result()
+        }
+
+        fun <T> requestCall(context: Context, task: (() -> T)): T? {
+
+            if (!NetworkVisibility.isAvailable(context))
+                return null  //TODO 'custom login'
+
+            return task()
         }
     }
 
