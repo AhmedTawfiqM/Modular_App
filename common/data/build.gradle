@@ -9,6 +9,7 @@ dependencies {
     implementation Libs.networkLibs.retrofitConverter
     implementation Libs.networkLibs.retrofitAdapter
 
+    implementation Libs.networkLibs.okHttp
     implementation Libs.networkLibs.loggingInterceptor
 
     implementation Libs.gsonLibs.gsonGoogle

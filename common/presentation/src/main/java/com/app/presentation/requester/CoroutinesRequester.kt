@@ -13,13 +13,13 @@ class CoroutinesRequester(
 
     private lateinit var job: Deferred<suspend () -> Unit>
 
-    suspend fun request(
+    suspend fun <T>request(
         context: CoroutineContext = Dispatchers.IO,
-        call: suspend () -> Unit
-    ) {
+        call: suspend () -> T
+    )  :T {
 
         presenter.showLoading()
-        job = coroutineScope {
+        val job = coroutineScope {
             async(context) {
                 call
             }

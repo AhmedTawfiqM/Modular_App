@@ -1,12 +1,14 @@
 package com.app.presentation.requester
 
 import androidx.fragment.app.FragmentActivity
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 class AppRequester(activity: FragmentActivity) {
 
     private val progressLoading = ProgressLoader(activity)
 
-    val requester by lazy {
+    private val requester by lazy {
 
         val presenter = object : Presenter {
             override fun showLoading() {
@@ -24,6 +26,13 @@ class AppRequester(activity: FragmentActivity) {
         }
 
         CoroutinesRequester(presenter)
+    }
+
+    suspend fun <T>request(
+        context: CoroutineContext = Dispatchers.IO,
+        call: suspend () -> T
+    )  :T{
+        return requester.request(context, call)
     }
 
 }

@@ -27,6 +27,7 @@ object Libs {
         //okHttp
         const val loggingInterceptor =
             "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
+        const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     }
 
     object GsonLibs {
@@ -53,6 +54,7 @@ object Libs {
         //network
         const val retrofit = "2.9.0"
         const val loggingInterceptor = "4.9.1"
+        const val okHttp = "4.9.1"
         const val gsonGoogle = "2.8.7"
 
         //Kotlin Coroutines
