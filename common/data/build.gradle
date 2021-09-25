@@ -2,4 +2,12 @@ apply from: "$rootDir/$GradleName.common"
 
 dependencies {
     api project(AppModule.core)
+
+    implementation Libs.networkLibs.retrofitRuntime
+    implementation Libs.networkLibs.retrofitConverter
+    implementation Libs.networkLibs.retrofitAdapter
+
+    implementation Libs.networkLibs.loggingInterceptor
+
+    implementation Libs.gsonLibs.gsonGoogle
 }
