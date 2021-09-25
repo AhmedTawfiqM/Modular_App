@@ -1,37 +1,40 @@
 package com.app.presentation.requester
 
 import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
-class AppRequester {
+class AppRequester(
+    private val activity: FragmentActivity,
+) {
+    private val progressLoader by lazy { ProgressLoader(activity) }
 
-    companion object {
+    suspend fun <T> request(context: Context, repoCall: suspend () -> T): T? {
 
-        suspend fun <T> request(context: Context, repoCall: suspend () -> T): T? {
+        if (!NetworkVisibility.isAvailable(context))
+            return null  //TODO 'custom login'
 
-            if (!NetworkVisibility.isAvailable(context))
-                return null  //TODO 'custom login'
-
-            val job = coroutineScope {
-                async {
-                    repoCall
-                }
+        progressLoader.show()
+        val job = coroutineScope {
+            async {
+                repoCall
             }
-            println("result starting...")
-            val result = job.await()
-            job.cancel()
-
-            return result()
         }
+        println("result starting...")
+        val result = job.await()
+        job.cancel()
+        progressLoader.show()
 
-        fun <T> requestCall(context: Context, task: (() -> T)): T? {
+        return result()
+    }
 
-            if (!NetworkVisibility.isAvailable(context))
-                return null  //TODO 'custom login'
+    fun <T> requestCall(context: Context, task: (() -> T)): T? {
 
-            return task()
-        }
+        if (!NetworkVisibility.isAvailable(context))
+            return null  //TODO 'custom login'
+
+        return task()
     }
 
 }

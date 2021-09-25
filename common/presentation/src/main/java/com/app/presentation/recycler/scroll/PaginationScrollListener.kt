@@ -13,7 +13,9 @@ protected constructor(private val layoutManager: LinearLayoutManager) :
         val visibleItemCount = layoutManager.childCount
         val totalItemCount = layoutManager.itemCount
         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-        if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
+        if (visibleItemCount + firstVisibleItemPosition >=
+            totalItemCount && firstVisibleItemPosition >= 0
+        ) {
             loadMoreItems()
         }
     }

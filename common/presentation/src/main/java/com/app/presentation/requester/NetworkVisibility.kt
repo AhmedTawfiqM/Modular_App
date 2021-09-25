@@ -6,6 +6,9 @@ import android.net.ConnectivityManager
 
 class NetworkVisibility {
 
+    init {
+        
+    }
     companion object {
 
         //TODO: remove Deprecation
