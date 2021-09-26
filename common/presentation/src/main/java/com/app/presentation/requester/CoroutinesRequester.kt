@@ -1,5 +1,6 @@
 package com.app.presentation.requester
 
+import com.app.presentation.requester.flow.FlowRequester
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlin.coroutines.CoroutineContext
@@ -9,7 +10,27 @@ class CoroutinesRequester(
 ) {
 
     suspend fun <T> request(
+        requestType: RequestType,
         requestOptions: RequestOptions,
+        context: CoroutineContext,
+        call: suspend () -> T
+    ): T {
+
+        return when (requestType) {
+            RequestType.Deferred -> requestWithDeferred(context, call)
+            RequestType.Flow -> requestWithFlow(context, call)
+        }
+    }
+
+    private fun <T> requestWithFlow(
+        context: CoroutineContext,
+        call: suspend () -> T
+    ): T {
+        val flowRequester = FlowRequester()
+
+    }
+
+    private suspend fun <T> requestWithDeferred(
         context: CoroutineContext,
         call: suspend () -> T
     ): T {

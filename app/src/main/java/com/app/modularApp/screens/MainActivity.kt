@@ -7,6 +7,7 @@ import com.app.modularApp.R
 import com.app.presentation.requester.AppRequester
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,11 +19,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mockingRequest() {
-        GlobalScope.launch {
-            val requester = AppRequester(this@MainActivity)
+        val requester = AppRequester(this@MainActivity)
+
+        runBlocking {
             requester.request {
                 FakeApi.api.getData()
             }
         }
+//        GlobalScope.launch {
+//            val requester = AppRequester(this@MainActivity)
+//            requester.request {
+//                FakeApi.api.getData()
+//            }
+//        }
     }
 }

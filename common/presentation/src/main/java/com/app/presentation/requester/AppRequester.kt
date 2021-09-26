@@ -29,11 +29,14 @@ class AppRequester(activity: FragmentActivity) {
     }
 
     suspend fun <T> request(
+        requestType: RequestType = RequestType.Deferred,
         requestOptions: RequestOptions = RequestOptions.default(),
         context: CoroutineContext = Dispatchers.IO,
         call: suspend () -> T
     ): T {
-        return requester.request(requestOptions, context, call)
+        return requester.request(
+            requestType, requestOptions, context, call
+        )
     }
 
 }
