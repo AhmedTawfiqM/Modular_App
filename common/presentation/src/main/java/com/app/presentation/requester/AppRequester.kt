@@ -28,11 +28,12 @@ class AppRequester(activity: FragmentActivity) {
         CoroutinesRequester(presenter)
     }
 
-    suspend fun <T>request(
+    suspend fun <T> request(
+        requestOptions: RequestOptions = RequestOptions.default(),
         context: CoroutineContext = Dispatchers.IO,
         call: suspend () -> T
-    )  :T{
-        return requester.request(context, call)
+    ): T {
+        return requester.request(requestOptions, context, call)
     }
 
 }

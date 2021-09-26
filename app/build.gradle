@@ -31,6 +31,6 @@ android {
 
 dependencies {
     implementation project(AppModule.core)
-    api project(AppModule.data)
+    implementation project(AppModule.data)
     implementation project(AppModule.presentation)
 }
