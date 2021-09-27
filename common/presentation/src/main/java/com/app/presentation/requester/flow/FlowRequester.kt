@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.collect
 class FlowRequester {
 
     @InternalCoroutinesApi
-    suspend fun <T : Any> request(call: Flow<Resource<String>>) {
+    suspend fun <T : Any> request(call: Flow<NetworkResult<String>>) {
 
         call.collect {
         }
