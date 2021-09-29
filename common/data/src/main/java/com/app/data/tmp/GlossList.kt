@@ -1,3 +1,3 @@
 package com.app.data.tmp
 
-data class GlossList(val glossEntry: GlossEntry)
+data class GlossList(val GlossEntry: GlossEntry)

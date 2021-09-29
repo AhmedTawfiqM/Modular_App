@@ -1,9 +1,9 @@
 package com.app.data.tmp
 
-data class GlossEntry(val glossTerm: String = "",
+data class GlossEntry(val GlossTerm: String = "",
                       val glossSee: String = "",
-                      val sortAs: String = "",
+                      val SortAs: String = "",
                       val glossDef: GlossDef,
-                      val id: String = "",
+                      val ID: String = "",
                       val acronym: String = "",
                       val abbrev: String = "")

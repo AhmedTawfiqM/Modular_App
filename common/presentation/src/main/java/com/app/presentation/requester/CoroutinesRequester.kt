@@ -18,16 +18,8 @@ class CoroutinesRequester(
 
         return when (requestType) {
             RequestType.Deferred -> requestWithDeferred(context, call)
-            RequestType.Flow -> requestWithFlow(context, call)
+            RequestType.Flow -> requestWithDeferred(context, call)
         }
-    }
-
-    private fun <T> requestWithFlow(
-        context: CoroutineContext,
-        call: suspend () -> T
-    ): T {
-        val flowRequester = FlowRequester()
-
     }
 
     private suspend fun <T> requestWithDeferred(
@@ -46,6 +38,14 @@ class CoroutinesRequester(
 
         presenter.hideLoading()
         return result()
+    }
+
+    private fun <T> requestWithFlow(
+        context: CoroutineContext,
+        call: suspend () -> T
+    ): T? {
+        val flowRequester = FlowRequester()
+        return null
     }
 
     private fun handleError() {

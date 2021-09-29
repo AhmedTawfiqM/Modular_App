@@ -1,6 +1,7 @@
 package com.app.modularApp.screens
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.data.tmp.FakeApi
 import com.app.modularApp.R
@@ -11,9 +12,12 @@ import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var tvContent: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        tvContent = findViewById(R.id.tvContent)
 
         mockingRequest()
     }
@@ -23,15 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         runBlocking {
             requester.request {
-                FakeApi.api.getData()
+                val response = FakeApi.api.getData()
+                tvContent.text = response.body().toString()
             }
         }
-//        GlobalScope.launch {
-//            val requester = AppRequester(this@MainActivity)
-//            requester.request {
-//                FakeApi.api.getData()
-//            }
-//        }
     }
 
 }
