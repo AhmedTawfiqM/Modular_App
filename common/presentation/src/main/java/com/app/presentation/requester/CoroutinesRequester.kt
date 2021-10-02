@@ -1,8 +1,13 @@
 package com.app.presentation.requester
 
 import com.app.presentation.requester.flow.FlowRequester
+import com.app.presentation.requester.flow.Resource
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
 class CoroutinesRequester(
@@ -14,7 +19,7 @@ class CoroutinesRequester(
         requestOptions: RequestOptions,
         context: CoroutineContext,
         call: suspend () -> T
-    ): T {
+    ): T? {
 
         return when (requestType) {
             RequestType.Deferred -> requestWithDeferred(context, call)
@@ -25,7 +30,7 @@ class CoroutinesRequester(
     private suspend fun <T> requestWithDeferred(
         context: CoroutineContext,
         call: suspend () -> T
-    ): T {
+    ): T? {
 
         presenter.showLoading()
         val job = coroutineScope {
@@ -40,16 +45,13 @@ class CoroutinesRequester(
         return result()
     }
 
-    private fun <T> requestWithFlow(
-        context: CoroutineContext,
+    @InternalCoroutinesApi
+    suspend fun <T>requestWithFlow(
         call: suspend () -> T
-    ): T? {
-        val flowRequester = FlowRequester()
-        return null
-    }
+    ): MutableStateFlow<Resource<T>> {
 
-    private fun handleError() {
-        presenter.hideLoading()
-        presenter.showError()
+        val flowRequester = FlowRequester<T>(presenter)
+        flowRequester.request(call = call)
+        return flowRequester.result
     }
 }

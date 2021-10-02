@@ -1,7 +1,12 @@
 package com.app.presentation.requester
 
 import androidx.fragment.app.FragmentActivity
+import com.app.presentation.requester.flow.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
 class AppRequester(activity: FragmentActivity) {
@@ -19,8 +24,10 @@ class AppRequester(activity: FragmentActivity) {
                 progressLoading.hide()
             }
 
-            override fun showError() {
+            override fun showError(ex: Throwable) {
+            }
 
+            override fun showError(msg: String) {
             }
 
         }
@@ -33,10 +40,17 @@ class AppRequester(activity: FragmentActivity) {
         requestOptions: RequestOptions = RequestOptions.default(),
         context: CoroutineContext = Dispatchers.IO,
         call: suspend () -> T
-    ): T {
-        return requester.request(
+    ){
+        requester.request(
             requestType, requestOptions, context, call
         )
+    }
+
+    @InternalCoroutinesApi
+    suspend fun <T>requestWithFlow(
+        call: suspend () -> Response<T>
+    ): MutableStateFlow<Resource<Any>> {
+        return requester.requestWithFlow(call)
     }
 
 }

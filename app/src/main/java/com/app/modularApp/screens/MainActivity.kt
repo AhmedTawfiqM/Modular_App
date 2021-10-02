@@ -6,20 +6,32 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.data.tmp.FakeApi
 import com.app.modularApp.R
 import com.app.presentation.requester.AppRequester
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tvContent: TextView
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tvContent = findViewById(R.id.tvContent)
 
-        mockingRequest()
+        //mockingRequest()
+        flowRequest()
+    }
+
+    @InternalCoroutinesApi
+    private fun flowRequest() {
+        val requester = AppRequester(this@MainActivity)
+        runBlocking {
+            val value  = requester.requestWithFlow {
+                FakeApi.api.getGlory()
+            }
+            tvContent.text = value.value.toString()
+        }
     }
 
     private fun mockingRequest() {
@@ -31,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                 tvContent.text = response.body().toString()
             }
         }
+
+
     }
 
 }
